@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sustainable Product Recommendation System</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+<!-- 🌿 NAVBAR -->
+<nav class="navbar enhanced">
+    <div class="nav-container">
+
+        <div class="nav-logo">
+            <span>EcoSense</span>
+        </div>
+
+        <input type="checkbox" id="menu-toggle">
+        <label for="menu-toggle" class="menu-icon">
+            <span></span><span></span><span></span>
+        </label>
+
+        <ul class="nav-menu">
+            <li><a href="/" class="{% if request.path == '/' %}active{% endif %}">Home</a></li>
+            <li><a href="/categories" class="{% if request.path.startswith('/categories') %}active{% endif %}">Categories</a></li>
+            <li><a href="/awareness" class="{% if request.path.startswith('/awareness') %}active{% endif %}">Awareness</a></li>
+            <li><a href="/countries" class="{% if request.path.startswith('/countries') %}active{% endif %}">Sustainable Countries</a></li>
+            <li><a href="/check" class="{% if request.path.startswith('/check') %}active{% endif %}">Check Sustainability</a></li>
+        </ul>
+
+    </div>
+</nav>
+
+<!-- 🌎 HERO SECTION -->
+<section class="hero-section">
+    <div class="hero-content">
+        <h1>Make Smart, Eco-Friendly Choices</h1>
+        <p>Search and discover sustainable products using data-driven environmental evaluation.</p>
+
+        <form action="/search" method="POST" class="search-bar">
+            <input type="text" name="product"
+                   placeholder="Search by product category (e.g., Bottles, Bags, Cups)" required>
+            <button type="submit">Search</button>
+        </form>
+
+        <p style="margin-top:10px; font-size:14px; color:#555;">
+            Not sure what to search?
+            <a href="/categories" style="color:#2e7d32; font-weight:bold;">
+                Browse all categories
+            </a>
+        </p>
+    </div>
+
+    <div class="hero-image">
+        <img src="{{ url_for('static', filename='img/home3.jpg') }}" alt="Sustainable Image">
+    </div>
+</section>
+
+<!-- 🌍 WHY ECO-FRIENDLY SECTION -->
+<section class="eco-section">
+    <h2>Why Choose Eco-Friendly Products?</h2>
+
+    <div class="eco-grid">
+        <div class="eco-card">
+            <h3>🌱 Reduce Waste</h3>
+            <p>Eco-friendly products minimize plastic pollution and landfill waste.</p>
+        </div>
+
+        <div class="eco-card">
+            <h3>🌍 Lower Carbon Emissions</h3>
+            <p>Sustainable materials produce fewer greenhouse gases.</p>
+        </div>
+
+        <div class="eco-card">
+            <h3>♻ Better Recyclability</h3>
+            <p>High recyclability allows materials to be reused efficiently.</p>
+        </div>
+
+        <div class="eco-card">
+            <h3>🌿 Protect the Environment</h3>
+            <p>Smart choices contribute to a cleaner and healthier planet.</p>
+        </div>
+    </div>
+</section>
+
+<!-- 🌱 HOW WE EVALUATE SUSTAINABILITY -->
+<section class="eco-section" style="background:#f0fff4;">
+    <h2>How We Evaluate Sustainability</h2>
+    <p style="max-width:800px; margin:0 auto 25px; color:#555;">
+        Each product is evaluated using multiple environmental metrics to ensure
+        balanced and fair sustainability recommendations.
+    </p>
+
+    <div class="eco-grid">
+
+        <div class="eco-card">
+            <h3>♻ Recyclability</h3>
+            <p>
+                Measures how much of the product can be recycled after use.
+                Higher recyclability helps reduce landfill waste.
+            </p>
+        </div>
+
+        <div class="eco-card">
+            <h3>🌫 Carbon Footprint</h3>
+            <p>
+                Indicates the amount of CO₂ emitted during manufacturing.
+                Lower carbon footprint means lower climate impact.
+            </p>
+        </div>
+
+        <div class="eco-card">
+            <h3>🍃 Biodegradability</h3>
+            <p>
+                Shows how easily a material decomposes naturally without harming ecosystems.
+            </p>
+        </div>
+
+        <div class="eco-card">
+            <h3>⏳ Lifespan</h3>
+            <p>
+                Products with longer lifespans reduce the need for frequent replacements,
+                saving resources over time.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <p>© 2025 EcoSense | Sustainable Products Recommendation System</p>
+</footer>
+
+</body>
+</html>

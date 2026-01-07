@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Top Sustainable Countries – EcoSense</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    
+
+    <style>
+        body {
+            background: #f4fbf7;
+            font-family: "Poppins", sans-serif;
+            margin: 0;
+        }
+
+        .country-wrapper {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #1b6e42;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #4b4b4b;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+
+        .country-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .country-card {
+            background: white;
+            padding: 20px;
+            border-radius: 14px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border-top: 5px solid #2e7d32;
+            transition: 0.3s ease;
+        }
+
+        .country-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .rank {
+            font-size: 22px;
+            font-weight: bold;
+            color: #2e7d32;
+        }
+
+        .country-name {
+            font-size: 18px;
+            font-weight: 600;
+            margin-top: 5px;
+        }
+
+        .country-desc {
+            font-size: 14px;
+            color: #555;
+            margin-top: 8px;
+        }
+
+        .message-box {
+            margin-top: 40px;
+            background: #e8f5e9;
+            padding: 25px;
+            border-radius: 14px;
+            font-size: 16px;
+            color: #1b5e20;
+            font-weight: 500;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar enhanced">
+    <div class="nav-container">
+        <div class="nav-logo"><span>EcoSense</span></div>
+
+        <input type="checkbox" id="menu-toggle">
+        <label for="menu-toggle" class="menu-icon">
+            <span></span><span></span><span></span>
+        </label>
+
+        <ul class="nav-menu">
+            <li><a href="/">Home</a></li>
+            <li><a href="/categories" >Categories</a></li>
+            <li><a href="/awareness">Awareness</a></li>
+            <li><a href="/countries" class="active">Sustainable Countries</a></li>
+            <li><a href="/check">Check Sustainability</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="country-wrapper">
+
+    <h1>🌍 Top 10 Most Sustainable Countries</h1>
+    <p class="subtitle">
+        Based on global sustainability performance and SDG progress
+    </p>
+
+    <div class="country-grid">
+
+        <div class="country-card">
+            <div class="rank">#1</div>
+            <div class="country-name">Finland</div>
+            <div class="country-desc">Leader in renewable energy, waste management, and environmental policies.</div>
+        </div>
+
+        <div class="country-card">
+            <div class="rank">#2</div>
+            <div class="country-name">Sweden</div>
+            <div class="country-desc">Strong circular economy and low carbon emissions.</div>
+        </div>
+
+        <div class="country-card">
+            <div class="rank">#3</div>
+            <div class="country-name">Denmark</div>
+            <div class="country-desc">World leader in wind energy and sustainable urban planning.</div>
+        </div>
+
+        <div class="country-card">
+            <div class="rank">#4</div>
+            <div class="country-name">Germany</div>
+            <div class="country-desc">Advanced recycling systems and green technology adoption.</div>
+        </div>
+
+        <div class="country-card">
+            <div class="rank">#5</div>
+            <div class="country-name">Netherlands</div>
+            <div class="country-desc">Innovative water management and eco-friendly infrastructure.</div>
+        </div>
+
+        <div class="country-card">
+            <div class="rank">#6</div>
+            <div class="country-name">Norway</div>
+            <div class="country-desc">High use of electric vehicles and clean hydropower.</div>
+        </div>
+
+        <div class="country-card">
+            <div class="rank">#7</div>
+            <div class="country-name">Switzerland</div>
+            <div class="country-desc">Excellent waste segregation and environmental awareness.</div>
+        </div>
+
+        <div class="country-card">
+            <div class="rank">#8</div>
+            <div class="country-name">Austria</div>
+            <div class="country-desc">Strong policies for climate protection and recycling.</div>
+        </div>
+
+        <div class="country-card">
+            <div class="rank">#9</div>
+            <div class="country-name">France</div>
+            <div class="country-desc">Focus on sustainable transport and clean energy.</div>
+        </div>
+
+        <div class="country-card">
+            <div class="rank">#10</div>
+            <div class="country-name">United Kingdom</div>
+            <div class="country-desc">Rapid transition toward renewable energy sources.</div>
+        </div>
+
+    </div>
+
+    <!-- MOTIVATIONAL MESSAGE -->
+    <div class="message-box">
+        🌱 <strong>If your country is not on this list, don’t be discouraged.</strong><br><br>
+        Sustainability starts with individuals.  
+        By choosing eco-friendly products, reducing waste, and adopting a sustainable lifestyle,  
+        <strong>you contribute directly to your country’s future sustainability.</strong><br><br>
+        Every responsible choice today helps your nation move closer to this list tomorrow.
+    </div>
+
+</div>
+
+<footer class="footer">
+    <p>© 2025 EcoSense | Sustainable Product Recommendation System</p>
+</footer>
+
+</body>
+</html>

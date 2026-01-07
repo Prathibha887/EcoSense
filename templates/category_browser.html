@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Browse Categories – EcoSense</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+        body {
+            background: #f5fbf7;
+            margin: 0;
+        }
+
+        .category-container {
+            max-width: 1150px;
+            margin: 40px auto;
+            padding: 0 16px;
+        }
+
+        .category-heading {
+            text-align: center;
+            font-size: 34px;
+            font-weight: 700;
+            color: #1b5e20;
+            margin-bottom: 8px;
+        }
+
+        .category-subtext {
+            text-align: center;
+            color: #4f6f5a;
+            margin-bottom: 32px;
+            font-size: 16px;
+        }
+
+        /* GRID */
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        /* CARD */
+        .category-card {
+            background: #ffffff;
+            padding: 22px 18px;
+            text-align: center;
+            font-weight: 600;
+            border-radius: 14px;
+            cursor: pointer;
+            border-left: 6px solid #2e7d32;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .category-card:hover {
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 10px 22px rgba(0,0,0,0.22);
+        }
+
+        /* ---------- MOBILE FIXES ---------- */
+        @media (max-width: 768px) {
+            .category-heading {
+                font-size: 26px;
+            }
+
+            .category-subtext {
+                font-size: 14px;
+                margin-bottom: 24px;
+            }
+
+            .category-card {
+                padding: 18px;
+                font-size: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .category-container {
+                margin: 30px auto;
+            }
+
+            .category-heading {
+                font-size: 22px;
+            }
+
+            .category-card {
+                font-size: 14px;
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar enhanced">
+    <div class="nav-container">
+        <div class="nav-logo"><span>EcoSense</span></div>
+
+        <input type="checkbox" id="menu-toggle">
+        <label for="menu-toggle" class="menu-icon">
+            <span></span><span></span><span></span>
+        </label>
+
+        <ul class="nav-menu">
+            <li><a href="/">Home</a></li>
+            <li><a href="/categories" class="active">Categories</a></li>
+            <li><a href="/awareness">Awareness</a></li>
+            <li><a href="/countries">Sustainable Countries</a></li>
+            <li><a href="/check">Check Sustainability</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- CONTENT -->
+<div class="category-container">
+
+    <h1 class="category-heading">Sustainable Product Categories</h1>
+    <p class="category-subtext">
+        Select a category to view the most sustainable product recommendation.
+    </p>
+
+    <div class="category-grid">
+        {% for cat in categories %}
+            <a href="{{ url_for('open_category', name=cat) }}"
+               style="text-decoration:none; color:inherit;">
+                <div class="category-card">
+                    {{ cat }}
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <p>© 2025 EcoSense | Sustainable Products Recommendation System</p>
+</footer>
+
+</body>
+</html>

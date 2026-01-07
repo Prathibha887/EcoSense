@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eco Awareness | EcoSense</title>
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4fbf7;
+            margin: 0;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 30px auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #1b6e42;
+            margin-bottom: 10px;
+            font-size: 30px;
+        }
+
+        .subtext {
+            text-align: center;
+            color: #2e4e3f;
+            margin-bottom: 30px;
+        }
+
+        /* Banner */
+        .banner {
+            background: #18a558;
+            color: white;
+            padding: 35px 20px;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 20px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Slider */
+        .slider {
+            position: relative;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        .slide {
+            position: absolute;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            padding: 0 15px;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .dots {
+            margin-top: 15px;
+        }
+
+        .dot {
+            height: 10px;
+            width: 10px;
+            margin: 0 4px;
+            background-color: #c8f5d1;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .active-dot {
+            background-color: #ffffff !important;
+        }
+
+        /* Tips */
+        .tips-title {
+            margin-top: 40px;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #1b6e42;
+            font-size: 24px;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .tip-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.06);
+        }
+
+        .tip-card h3 {
+            color: #1b6e42;
+        }
+
+        .tip-card p {
+            color: #2e4e3f;
+            font-size: 14px;
+        }
+
+        /* Impact */
+        .impact-box {
+            background: white;
+            margin-top: 40px;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.06);
+            text-align: center;
+        }
+
+        .impact-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin-bottom: 20px;
+            gap: 20px;
+        }
+
+        .impact-item {
+            width: 300px;
+        }
+
+        .impact-item h3 {
+            color: #1b6e42;
+        }
+
+        .impact-item p {
+            color: #2e4e3f;
+            font-size: 14px;
+        }
+
+        .footer-note {
+            font-size: 14px;
+            color: #234b39;
+            margin-top: 15px;
+        }
+
+        .back-btn {
+            display: block;
+            margin: 30px auto;
+            width: fit-content;
+            padding: 12px 20px;
+            font-size: 16px;
+            background-color: #1b6e42;
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar enhanced">
+    <div class="nav-container">
+        <div class="nav-logo"><span>EcoSense</span></div>
+
+        <input type="checkbox" id="menu-toggle">
+        <label for="menu-toggle" class="menu-icon">
+            <span></span><span></span><span></span>
+        </label>
+
+        <ul class="nav-menu">
+            <li><a href="/">Home</a></li>
+            <li><a href="/categories">Categories</a></li>
+            
+            <li><a href="/awareness" class="active">Awareness</a></li>
+            <li><a href="/countries" class="{% if request.path.startswith('/countries') %}active{% endif %}">Sustainable countries</a></li>
+    <li><a href="/check" class="{% if request.path.startswith('/check') %}active{% endif %}">Check Sustainability</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+
+    <h1>Eco Awareness & Tips</h1>
+    <p class="subtext">
+        Small sustainable choices today create a healthier planet tomorrow.
+    </p>
+
+    <!-- Banner -->
+    <div class="banner">
+        <strong>Did You Know?</strong>
+
+        <div class="slider">
+            <div class="slide active">Using reusable bags can save over 100 billion plastic bags every year.</div>
+            <div class="slide">Recycling aluminum saves 95% of the energy needed to make new metal.</div>
+            <div class="slide">Plastics can take more than 450 years to decompose.</div>
+            <div class="slide">Energy-efficient appliances significantly reduce carbon emissions.</div>
+            <div class="slide">Sustainable products help conserve natural resources.</div>
+        </div>
+
+        <div class="dots">
+            <span class="dot active-dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>
+    </div>
+
+    <h2 class="tips-title">Daily Sustainability Tips</h2>
+
+    <div class="tips-grid">
+        <div class="tip-card">
+            <h3>♻ Recycle Smart</h3>
+            <p>Clean and separate recyclables to prevent contamination.</p>
+        </div>
+
+        <div class="tip-card">
+            <h3>🌳 Plant Trees</h3>
+            <p>One tree absorbs up to 48 pounds of CO₂ each year.</p>
+        </div>
+
+        <div class="tip-card">
+            <h3>💧 Save Water</h3>
+            <p>Turning off taps while brushing saves hundreds of liters monthly.</p>
+        </div>
+
+        <div class="tip-card">
+            <h3>💡 Save Energy</h3>
+            <p>Switching to LEDs reduces energy usage by up to 75%.</p>
+        </div>
+
+        <div class="tip-card">
+            <h3>🛍 Reduce Waste</h3>
+            <p>Reusable bags and bottles minimize plastic pollution.</p>
+        </div>
+
+    </div>
+
+    <div class="impact-box">
+        <h2 style="color:#1b6e42;">How Your Choices Matter</h2>
+
+        <div class="impact-grid">
+            <div class="impact-item">
+                <h3>🌿 Lower Carbon Footprint</h3>
+                <p>Eco-friendly products reduce greenhouse gas emissions.</p>
+            </div>
+
+            <div class="impact-item">
+                <h3>♻ Circular Economy</h3>
+                <p>Recyclable materials stay in use longer.</p>
+            </div>
+
+            <div class="impact-item">
+                <h3>💚 Inspire Others</h3>
+                <p>Your actions encourage sustainable behavior in society.</p>
+            </div>
+        </div>
+
+        <p class="footer-note">
+            Every purchase is a choice. Choose sustainability.
+        </p>
+    </div>
+
+    
+
+</div>
+
+<script>
+    let index = 0;
+    const slides = document.querySelectorAll(".slide");
+    const dots = document.querySelectorAll(".dot");
+
+    function showSlide(i) {
+        slides.forEach((slide, idx) => {
+            slide.classList.remove("active");
+            dots[idx].classList.remove("active-dot");
+            if (idx === i) {
+                slide.classList.add("active");
+                dots[idx].classList.add("active-dot");
+            }
+        });
+    }
+
+    setInterval(() => {
+        index = (index + 1) % slides.length;
+        showSlide(index);
+    }, 4000);
+</script>
+<footer class="footer">
+    <p>© 2025 EcoSense | Sustainable Products Recommendation System</p>
+</footer>
+</body>
+</html>
