@@ -1,7 +1,7 @@
-from flask import Flask, render_template, request, redirect, url_for
-import pandas as pd
+from flask import Flask, render_template, request, redirect, url_for 
+import pandas as pd 
 import joblib
-import numpy as np
+import numpy as np 
 import urllib.parse
 
 app = Flask(__name__)
