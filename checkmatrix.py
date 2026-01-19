@@ -3,7 +3,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 
 # Load dataset
-df = pd.read_csv("generated_sustainable_products_1110.csv")
+df = pd.read_csv("Sustainable_products.csv")
 
 # Features and target
 X = df[["Recyclability_pct", "Carbon_kgCO2", "Biodegradability", "Lifespan_years"]]

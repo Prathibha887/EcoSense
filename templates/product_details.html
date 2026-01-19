@@ -23,8 +23,8 @@
             <li><a href="/">Home</a></li>
             <li><a href="/categories">Categories</a></li>
             <li><a href="/awareness">Awareness</a></li>
-            <li><a href="/countries" class="{% if request.path.startswith('/countries') %}active{% endif %}">Sustainable countries</a></li>
-    <li><a href="/check" class="{% if request.path.startswith('/check') %}active{% endif %}">Check Sustainability</a></li>
+            <li><a href="/countries">Sustainable Countries</a></li>
+            <li><a href="/check">Check Sustainability</a></li>
         </ul>
     </div>
 </nav>
@@ -56,9 +56,9 @@
             </div>
 
             <div class="info-card big">
-                <div class="card-head">Recyclable</div>
+                <div class="card-head">Recyclability</div>
                 <div class="card-value">
-                    {% if product.Recyclability_pct >= 50 %} Yes {% else %} No {% endif %}
+                    {{ product.Recyclability_pct }}%
                 </div>
             </div>
         </div>
@@ -71,7 +71,7 @@
 
             {% if alternative_exists %}
             <button class="tab-btn" onclick="showTab('altTab', this)">
-                View Alternative
+                View Comparison
             </button>
             {% endif %}
 
@@ -88,7 +88,7 @@
 <!-- ================= TAB CONTENT ================= -->
 <div class="tab-content-container">
 
-    <!-- Sustainability Tab -->
+    <!-- Sustainability Info -->
     <div id="sustainTab" class="tab-section active">
         <div class="tab-block">
             <h3>Sustainability Information</h3>
@@ -102,83 +102,74 @@
         </div>
     </div>
 
-    <!-- Alternative Tab -->
+    <!-- ================= COMPARISON TAB ================= -->
     <div id="altTab" class="tab-section">
         {% if alternative %}
         <h2 class="compare-title">Sustainability Comparison</h2>
 
         <div class="compare-container">
 
-            <div class="compare-card current-card no-image-card">
-                <span class="compare-pill current-pill">Current</span>
+            <!-- BETTER OPTION -->
+            <div class="compare-card">
+                <h4>Better Option</h4>
                 <table class="compare-table">
                     <tr><td>Material</td><td>{{ product.Material }}</td></tr>
-                    <tr><td>Carbon</td><td>{{ product.Carbon_kgCO2 }} kg</td></tr>
-                    <tr><td>Recyclable</td><td>{{ product.Recyclability_pct }}%</td></tr>
+                    <tr><td>Carbon Footprint</td><td>{{ product.Carbon_kgCO2 }} kg</td></tr>
+                    <tr><td>Recyclability</td><td>{{ product.Recyclability_pct }}%</td></tr>
+                    <tr><td>Biodegradability</td><td>{{ product.Biodegradability }}%</td></tr>
+                    <tr>
+                        <td>Eco-Sustainability Score</td>
+                        <td>
+                            <div class="score-bar">
+                                <div class="score-fill"
+                                     style="width: {{ (product.eco_score * 100) | round(0) }}%;">
+                                </div>
+                            </div>
+                            <small>{{ (product.eco_score * 100) | round(0) }}% – Higher</small>
+                        </td>
+                    </tr>
                 </table>
             </div>
 
-            <div class="compare-card alt-card no-image-card">
-                <span class="compare-pill alt-pill">Lower Sustainability Option</span>
+            <!-- LOWER OPTION -->
+            <div class="compare-card">
+                <h4>Lower Sustainability Option</h4>
                 <table class="compare-table">
                     <tr><td>Material</td><td>{{ alternative.Material }}</td></tr>
-                    <tr><td>Carbon</td><td>{{ alternative.Carbon_kgCO2 }} kg</td></tr>
-                    <tr><td>Recyclable</td><td>{{ alternative.Recyclability_pct }}%</td></tr>
+                    <tr><td>Carbon Footprint</td><td>{{ alternative.Carbon_kgCO2 }} kg</td></tr>
+                    <tr><td>Recyclability</td><td>{{ alternative.Recyclability_pct }}%</td></tr>
+                    <tr><td>Biodegradability</td><td>{{ alternative.Biodegradability }}%</td></tr>
+                    <tr>
+                        <td>Eco-Sustainability Score</td>
+                        <td>
+                            <div class="score-bar">
+                                <div class="score-fill low"
+                                     style="width: {{ (alternative.eco_score * 100) | round(0) }}%;">
+                                </div>
+                            </div>
+                            <small>{{ (alternative.eco_score * 100) | round(0) }}% – Lower</small>
+                        </td>
+                    </tr>
                 </table>
 
                 <a href="{{ url_for('product_page', pid=alternative['index']) }}"
                    class="details-btn">
-                   Compare with Less Sustainable Choice
+                   View Less Sustainable Option
                 </a>
             </div>
 
         </div>
-        {% else %}
-        <p style="text-align:center;">This is the final product in the sustainability ranking.</p>
         {% endif %}
     </div>
 
-    <!-- WHY THIS IS BEST TAB (ONLY FOR BEST) -->
+    <!-- ================= WHY BEST ================= -->
     {% if is_best %}
     <div id="bestTab" class="tab-section">
         <div class="tab-block">
             <h3>Why This Material Ranks Best</h3>
-
             <p>
-                This product ranks <strong>highest</strong> in its category because it achieves
-                the best overall balance across multiple sustainability factors — not just one.
-            </p>
-
-            <ul>
-                <li>
-                    <strong>Balanced Performance:</strong>
-                    Some materials may have lower carbon footprint, while others may be more recyclable.
-                    This material performs consistently well across all evaluated factors.
-                </li>
-
-                <li>
-                    <strong>Eco-Score Based Ranking:</strong>
-                    Each product is evaluated using a combined eco-score that considers recyclability,
-                    biodegradability, carbon impact, and lifespan together.
-                </li>
-
-                <li>
-                    <strong>Trade-offs Considered:</strong>
-                    Even if one factor (such as carbon footprint) is slightly higher,
-                    strong performance in recyclability or durability can lead to a better
-                    overall sustainability outcome.
-                </li>
-
-                <li>
-                    <strong>Category-Specific Comparison:</strong>
-                    The ranking is done only within this product category,
-                    ensuring a fair comparison among similar products.
-                </li>
-            </ul>
-
-            <p style="margin-top:12px;">
-                This approach helps users choose products that are environmentally responsible
-                in a practical, real-world sense rather than relying on a single metric.
+                This material achieves the best balance across recyclability, carbon footprint,
+                biodegradability, and lifespan, resulting in a higher overall eco-score.
             </p>
         </div>
     </div>
@@ -186,9 +177,9 @@
 
 </div>
 
-<!-- ================= BACK BUTTON ================= -->
+<!-- ================= BACK ================= -->
 <div style="display:flex; justify-content:center; margin:40px 0;">
-    <a href="javascript:history.back()" class="details-btn" style="max-width:260px;">
+    <a href="javascript:history.back()" class="details-btn">
         ← Go Back
     </a>
 </div>

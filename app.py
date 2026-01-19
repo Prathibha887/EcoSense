@@ -6,7 +6,7 @@ import urllib.parse
 
 app = Flask(__name__)
 
-CSV_PATH = "generated_sustainable_products_1110.csv"
+CSV_PATH = "Sustainable_products.csv"
 MODEL_PATH = "sustainability_model.pkl"
 ENCODER_PATH = "label_encoder.pkl"
 
@@ -44,7 +44,6 @@ def compute_eco_score(row):
 
 df["eco_score"] = df.apply(compute_eco_score, axis=1)
 
-# -------------------- HELPERS --------------------
 
 # Rank materials BEST → WORST
 def rank_materials(category):
@@ -65,10 +64,7 @@ def get_product(category, material):
         (df["Material"] == material)
     ].iloc[0].to_dict()
 
-def generate_buy_link(product):
-    query = f"{product['Material']} {product['Category']}"
-    encoded_query = urllib.parse.quote_plus(query)
-    return f"https://www.amazon.in/s?k={encoded_query}"
+
 
 # -------------------- ROUTES --------------------
 
@@ -114,9 +110,7 @@ def product_page(pid):
     # Check if BEST product
     is_best = current_pos == 0
 
-    buy_link = None
-    if is_best:
-        buy_link = generate_buy_link(product)
+    
 
     # Next WORSE product
     alternative = None
@@ -133,7 +127,6 @@ def product_page(pid):
         predicted_label=predicted_label,
         alternative=alternative,
         alternative_exists=alternative_exists,
-        buy_link=buy_link,
         is_best=is_best
     )
 
@@ -152,38 +145,6 @@ def open_category(name):
     best_product = get_product(name, materials[0])
     return redirect(url_for("product_page", pid=best_product["index"]))
 
-# -------------------- COMPARE PAGE --------------------
-@app.route("/compare", methods=["GET", "POST"])
-def compare():
-    categories = sorted(df["Category"].unique())
-    bestA = bestB = None
-    selectedA = selectedB = None
-
-    if request.method == "POST":
-        selectedA = request.form.get("catA")
-        selectedB = request.form.get("catB")
-
-        if selectedA == selectedB:
-            return render_template(
-                "comparison.html",
-                categories=categories,
-                error="Select two different categories."
-            )
-
-        matA = rank_materials(selectedA)
-        matB = rank_materials(selectedB)
-
-        bestA = get_product(selectedA, matA[0])
-        bestB = get_product(selectedB, matB[0])
-
-    return render_template(
-        "comparison.html",
-        categories=categories,
-        bestA=bestA,
-        bestB=bestB,
-        selectedA=selectedA,
-        selectedB=selectedB
-    )
 
 # -------------------- COUNTRIES --------------------
 @app.route("/countries")
@@ -207,6 +168,8 @@ def countries():
 def awareness():
     return render_template("awareness.html")
 
+
+# -------------------- CHECK SUSTAINABILITY PAGE --------------------
 @app.route("/check", methods=["GET", "POST"])
 def check():
 

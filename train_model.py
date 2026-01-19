@@ -4,7 +4,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.preprocessing import LabelEncoder
 
-df = pd.read_csv("sustainable_products_2000_with_links.csv")
+df = pd.read_csv("sustainable_products.csv")
 
 X = df[["Recyclability_pct","Carbon_kgCO2","Biodegradability","Lifespan_years"]]
 y = df["Label"]

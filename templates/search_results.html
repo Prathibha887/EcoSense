@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Results</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<style>
+    /* ---------- SEARCH RESULTS PAGE ---------- */
+
+.page-title {
+    text-align: center;
+    color: #1b6e42;
+    margin-bottom: 20px;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+}
+
+/* TABLE STYLE */
+.results-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+}
+
+.results-table th,
+.results-table td {
+    padding: 14px 16px;
+    text-align: left;
+}
+
+.results-table th {
+    background-color: #e8f8ef;
+    color: #1b6e42;
+    font-weight: 600;
+}
+
+.results-table tr {
+    border-bottom: 1px solid #e6e6e6;
+}
+
+.results-table tr:hover {
+    background-color: #f4fbf7;
+}
+
+/* VIEW BUTTON */
+.view-btn {
+    display: inline-block;
+    padding: 8px 14px;
+    background-color: #1b6e42;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.view-btn:hover {
+    background-color: #145a35;
+}
+
+/* BACK LINK */
+.back-link {
+    display: inline-block;
+    margin-top: 20px;
+    text-decoration: none;
+    color: #1b6e42;
+    font-weight: 600;
+}
+
+/* ERROR BOX */
+.error-box {
+    text-align: center;
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+}
+
+/* ---------- RESPONSIVE DESIGN ---------- */
+@media (max-width: 768px) {
+
+    .results-table thead {
+        display: none;
+    }
+
+    .results-table,
+    .results-table tbody,
+    .results-table tr,
+    .results-table td {
+        display: block;
+        width: 100%;
+    }
+
+    .results-table tr {
+        margin-bottom: 15px;
+        border-radius: 10px;
+        background: #ffffff;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        padding: 10px;
+    }
+
+    .results-table td {
+        padding: 10px;
+        text-align: right;
+        position: relative;
+    }
+
+    .results-table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 10px;
+        font-weight: 600;
+        color: #1b6e42;
+        text-align: left;
+    }
+
+    .view-btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+</style>
+<body>
+
+<div class="container">
+
+    <h2 class="page-title">Search Results</h2>
+
+    {% if error %}
+        <div class="error-box">
+            <h3>{{ error }}</h3>
+            <a href="/" class="back-link">← Back</a>
+        </div>
+    {% else %}
+
+    <div class="table-wrapper">
+        <table class="results-table">
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Material</th>
+                    <th>Category</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in products %}
+                <tr>
+                    <td data-label="Product">{{ p.Product_Name }}</td>
+                    <td data-label="Material">{{ p.Material }}</td>
+                    <td data-label="Category">{{ p.Category }}</td>
+                    <td data-label="Action">
+                        <a href="/product/{{ p.index }}" class="view-btn">View</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <a href="/" class="back-link">← Back</a>
+
+    {% endif %}
+
+</div>
+
+</body>
+</html>
