@@ -1,199 +1,252 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{ product.Category }} – Product Details</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
 
-<body>
-
-<!-- ================= NAVBAR ================= -->
-<nav class="navbar enhanced">
-    <div class="nav-container">
+  <body>
+    <!-- ================= NAVBAR ================= -->
+    <nav class="navbar enhanced">
+      <div class="nav-container">
         <div class="nav-logo"><span>EcoSense</span></div>
 
-        <input type="checkbox" id="menu-toggle">
+        <input type="checkbox" id="menu-toggle" />
         <label for="menu-toggle" class="menu-icon">
-            <span></span><span></span><span></span>
+          <span></span><span></span><span></span>
         </label>
 
         <ul class="nav-menu">
-            <li><a href="/">Home</a></li>
-            <li><a href="/categories">Categories</a></li>
-            <li><a href="/awareness">Awareness</a></li>
-            <li><a href="/countries">Sustainable Countries</a></li>
-            <li><a href="/check">Check Sustainability</a></li>
+          <li><a href="/">Home</a></li>
+          <li><a href="/categories">Categories</a></li>
+          <li><a href="/awareness">Awareness</a></li>
+          <li><a href="/countries">Sustainable Countries</a></li>
+          <li><a href="/check">Check Sustainability</a></li>
         </ul>
-    </div>
-</nav>
+      </div>
+    </nav>
 
-<!-- ================= MAIN CONTENT ================= -->
-<main class="page-container single-column">
-
-    <aside class="right-col centered">
-
+    <!-- ================= MAIN CONTENT ================= -->
+    <main class="page-container single-column">
+      <aside class="right-col centered">
         <span class="pill">{{ product.Category }}</span>
 
         <h1 class="product-title">{{ product.Category }}</h1>
 
         <span class="score-badge">
-            Sustainability: <strong>{{ predicted_label }}</strong>
+          Sustainability: <strong>{{ predicted_label }}</strong>
         </span>
 
         <p class="lead-desc">
-            Evaluated using recyclability, carbon footprint, biodegradability, and lifespan.
+          Evaluated using recyclability, carbon footprint, biodegradability, and
+          lifespan.
         </p>
 
         <!-- SUMMARY CARDS -->
         <div class="cards-row centered-cards">
-            <div class="info-card big">
-                <div class="card-head">Carbon Footprint</div>
-                <div class="card-value">
-                    {{ product.Carbon_kgCO2 }} <span class="muted">kg CO₂</span>
-                </div>
+          <div class="info-card big">
+            <div class="card-head">Carbon Footprint</div>
+            <div class="card-value">
+              {{ product.Carbon_kgCO2 }} <span class="muted">kg CO₂</span>
             </div>
+          </div>
 
-            <div class="info-card big">
-                <div class="card-head">Recyclability</div>
-                <div class="card-value">
-                    {{ product.Recyclability_pct }}%
-                </div>
-            </div>
+          <div class="info-card big">
+            <div class="card-head">Recyclability</div>
+            <div class="card-value">{{ product.Recyclability_pct }}%</div>
+          </div>
         </div>
 
         <!-- TAB BUTTONS -->
         <div class="button-row centered-buttons">
-            <button class="tab-btn active" onclick="showTab('sustainTab', this)">
-                Sustainability Info
-            </button>
+          <button class="tab-btn active" onclick="showTab('sustainTab', this)">
+            Sustainability Info
+          </button>
 
-            {% if alternative_exists %}
-            <button class="tab-btn" onclick="showTab('altTab', this)">
-                View Comparison
-            </button>
-            {% endif %}
-
-            {% if is_best %}
-            <button class="tab-btn" onclick="showTab('bestTab', this)">
-                Why This Is Best
-            </button>
-            {% endif %}
+          {% if alternative_exists %}
+          <button class="tab-btn" onclick="showTab('altTab', this)">
+            View Comparison
+          </button>
+          {% endif %} {% if is_best %}
+          <button class="tab-btn" onclick="showTab('bestTab', this)">
+            Why This Is Best
+          </button>
+          {% endif %}
         </div>
+      </aside>
+    </main>
 
-    </aside>
-</main>
-
-<!-- ================= TAB CONTENT ================= -->
-<div class="tab-content-container">
-
-    <!-- Sustainability Info -->
-    <div id="sustainTab" class="tab-section active">
+    <!-- ================= TAB CONTENT ================= -->
+    <div class="tab-content-container">
+      <!-- Sustainability Info -->
+      <div id="sustainTab" class="tab-section active">
         <div class="tab-block">
-            <h3>Sustainability Information</h3>
-            <ul>
-                <li><strong>Material:</strong> {{ product.Material }}</li>
-                <li><strong>Recyclability:</strong> {{ product.Recyclability_pct }}%</li>
-                <li><strong>Biodegradability:</strong> {{ product.Biodegradability }}%</li>
-                <li><strong>Carbon Footprint:</strong> {{ product.Carbon_kgCO2 }} kg CO₂</li>
-                <li><strong>Lifespan:</strong> {{ product.Lifespan_years }} years</li>
-            </ul>
+          <h3>Sustainability Information</h3>
+          <ul>
+            <li><strong>Material:</strong> {{ product.Material }}</li>
+            <li>
+              <strong>Recyclability:</strong> {{ product.Recyclability_pct }}%
+            </li>
+            <li>
+              <strong>Biodegradability:</strong> {{ product.Biodegradability }}%
+            </li>
+            <li>
+              <strong>Carbon Footprint:</strong> {{ product.Carbon_kgCO2 }} kg
+              CO₂
+            </li>
+            <li>
+              <strong>Lifespan:</strong> {{ product.Lifespan_years }} years
+            </li>
+          </ul>
         </div>
-    </div>
+      </div>
 
-    <!-- ================= COMPARISON TAB ================= -->
-    <div id="altTab" class="tab-section">
+      <!-- ================= COMPARISON TAB ================= -->
+      <div id="altTab" class="tab-section">
         {% if alternative %}
         <h2 class="compare-title">Sustainability Comparison</h2>
 
         <div class="compare-container">
+          <!-- BETTER OPTION -->
+          <div class="compare-card">
+            <h4>Better Option</h4>
+            <table class="compare-table">
+              <tr>
+                <td>Material</td>
+                <td>{{ product.Material }}</td>
+              </tr>
+              <tr>
+                <td>Carbon Footprint</td>
+                <td>{{ product.Carbon_kgCO2 }} kg</td>
+              </tr>
+              <tr>
+                <td>Recyclability</td>
+                <td>{{ product.Recyclability_pct }}%</td>
+              </tr>
+              <tr>
+                <td>Biodegradability</td>
+                <td>{{ product.Biodegradability }}%</td>
+              </tr>
+              <tr>
+                <td>Eco-Sustainability Score</td>
+                <td>
+                  <div class="score-bar">
+                    <div
+                      class="score-fill"
+                      data-score="{{ product.eco_score }}"
+                    ></div>
+                  </div>
 
-            <!-- BETTER OPTION -->
-            <div class="compare-card">
-                <h4>Better Option</h4>
-                <table class="compare-table">
-                    <tr><td>Material</td><td>{{ product.Material }}</td></tr>
-                    <tr><td>Carbon Footprint</td><td>{{ product.Carbon_kgCO2 }} kg</td></tr>
-                    <tr><td>Recyclability</td><td>{{ product.Recyclability_pct }}%</td></tr>
-                    <tr><td>Biodegradability</td><td>{{ product.Biodegradability }}%</td></tr>
-                    <tr>
-                        <td>Eco-Sustainability Score</td>
-                        <td>
-                            <div class="score-bar">
-                                <div class="score-fill"
-                                     style="width: {{ (product.eco_score * 100) | round(0) }}%;">
-                                </div>
-                            </div>
-                            <small>{{ (product.eco_score * 100) | round(0) }}% – Higher</small>
-                        </td>
-                    </tr>
-                </table>
-            </div>
+                  <small
+                    >{{ (product.eco_score * 100) | round(0) }}% – Higher</small
+                  >
+                </td>
+              </tr>
+            </table>
+          </div>
 
-            <!-- LOWER OPTION -->
-            <div class="compare-card">
-                <h4>Lower Sustainability Option</h4>
-                <table class="compare-table">
-                    <tr><td>Material</td><td>{{ alternative.Material }}</td></tr>
-                    <tr><td>Carbon Footprint</td><td>{{ alternative.Carbon_kgCO2 }} kg</td></tr>
-                    <tr><td>Recyclability</td><td>{{ alternative.Recyclability_pct }}%</td></tr>
-                    <tr><td>Biodegradability</td><td>{{ alternative.Biodegradability }}%</td></tr>
-                    <tr>
-                        <td>Eco-Sustainability Score</td>
-                        <td>
-                            <div class="score-bar">
-                                <div class="score-fill low"
-                                     style="width: {{ (alternative.eco_score * 100) | round(0) }}%;">
-                                </div>
-                            </div>
-                            <small>{{ (alternative.eco_score * 100) | round(0) }}% – Lower</small>
-                        </td>
-                    </tr>
-                </table>
+          <!-- LOWER OPTION -->
+          <div class="compare-card">
+            <h4>Lower Sustainability Option</h4>
+            <table class="compare-table">
+              <tr>
+                <td>Material</td>
+                <td>{{ alternative.Material }}</td>
+              </tr>
+              <tr>
+                <td>Carbon Footprint</td>
+                <td>{{ alternative.Carbon_kgCO2 }} kg</td>
+              </tr>
+              <tr>
+                <td>Recyclability</td>
+                <td>{{ alternative.Recyclability_pct }}%</td>
+              </tr>
+              <tr>
+                <td>Biodegradability</td>
+                <td>{{ alternative.Biodegradability }}%</td>
+              </tr>
+              <tr>
+                <td>Eco-Sustainability Score</td>
+                <td>
+                  <div class="score-bar">
+    <div class="score-fill low"
+         data-score="{{ alternative.eco_score }}">
+    </div>
+</div>
+                  <small
+                    >{{ (alternative.eco_score * 100) | round(0) }}% –
+                    Lower</small
+                  >
+                </td>
+              </tr>
+            </table>
 
-                <a href="{{ url_for('product_page', pid=alternative['index']) }}"
-                   class="details-btn">
-                   View Less Sustainable Option
-                </a>
-            </div>
-
+            <a
+              href="{{ url_for('product_page', pid=alternative['index']) }}"
+              class="details-btn"
+            >
+              View Less Sustainable Option
+            </a>
+          </div>
         </div>
         {% endif %}
-    </div>
+      </div>
 
-    <!-- ================= WHY BEST ================= -->
-    {% if is_best %}
-    <div id="bestTab" class="tab-section">
+      <!-- ================= WHY BEST ================= -->
+      {% if is_best %}
+      <div id="bestTab" class="tab-section">
         <div class="tab-block">
-            <h3>Why This Material Ranks Best</h3>
-            <p>
-                This material achieves the best balance across recyclability, carbon footprint,
-                biodegradability, and lifespan, resulting in a higher overall eco-score.
-            </p>
+          <h3>Why This Material Ranks Best</h3>
+          <p>
+            This material achieves the best balance across recyclability, carbon
+            footprint, biodegradability, and lifespan, resulting in a higher
+            overall eco-score.
+          </p>
         </div>
+      </div>
+      {% endif %}
     </div>
-    {% endif %}
 
-</div>
+    <!-- ================= BACK ================= -->
+    <div style="display: flex; justify-content: center; margin: 40px 0">
+      <a href="javascript:history.back()" class="details-btn"> ← Go Back </a>
+    </div>
 
-<!-- ================= BACK ================= -->
-<div style="display:flex; justify-content:center; margin:40px 0;">
-    <a href="javascript:history.back()" class="details-btn">
-        ← Go Back
-    </a>
-</div>
+    <!-- ================= JS ================= -->
+    <script>
+      function showTab(tabId, btn) {
+        document
+          .querySelectorAll(".tab-section")
+          .forEach((t) => t.classList.remove("active"));
+        document.getElementById(tabId).classList.add("active");
 
-<!-- ================= JS ================= -->
+        document
+          .querySelectorAll(".tab-btn")
+          .forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+      }
+    </script>
+    <script>
+document.querySelectorAll(".score-fill").forEach(bar => {
+    const score = parseFloat(bar.dataset.score);
+    bar.style.width = (score * 100).toFixed(0) + "%";
+});
+</script>
 <script>
-function showTab(tabId, btn) {
-    document.querySelectorAll(".tab-section").forEach(t => t.classList.remove("active"));
-    document.getElementById(tabId).classList.add("active");
-
-    document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-}
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".score-fill").forEach(bar => {
+        let score = parseFloat(bar.dataset.score);
+        if (!isNaN(score)) {
+            bar.style.width = (score * 100).toFixed(0) + "%";
+        }
+    });
+});
 </script>
 
-</body>
+  </body>
 </html>
